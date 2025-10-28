@@ -2,9 +2,9 @@
 $org        = "your-org"
 $project    = "your-project"
 $wikiId     = "your-wiki"
-$pagePath   = "/Playbooks/Phishing"   # single page for PoC
+$pagePath   = "/<WIKI_PATH>/<WIKI_PAGE.md>"   # single page for PoC
 $pat        = "$(System.AccessToken)" # or pipeline secret
-$hiveUrl    = "https://thehive.example.com/api/case/template/{templateId}"
+$hiveUrl    = "https://thehive.example.com/api/caseTemplate/~templateId"
 $hiveApiKey = "$(TheHiveApiKey)"      # pipeline secret
 
 # === Auth Headers ===
