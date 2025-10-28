@@ -4,7 +4,7 @@ $project    = "your-project"
 $wikiId     = "your-wiki"
 $pagePath   = "/<WIKI_PATH>/<WIKI_PAGE.md>"   # single page for PoC
 $pat        = "$(System.AccessToken)" # or pipeline secret
-$hiveUrl    = "https://thehive.example.com/api/caseTemplate/~templateId"
+$hiveUrl    = "https://thehive.example.com/api/v1/caseTemplate/~templateId"
 $hiveApiKey = "$(TheHiveApiKey)"      # pipeline secret
 
 # === Auth Headers ===
