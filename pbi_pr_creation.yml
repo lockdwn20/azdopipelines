@@ -1,0 +1,24 @@
+- script: |
+    # Configure organization and project defaults dynamically
+    az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(System.TeamProject)
+
+    # 1. Create PBI and capture the work item ID
+    PBI_ID=$(az boards work-item create \
+      --title "Auto-Sync: <insert_title>" \
+      --type "Product Backlog Item" \
+      --description "Triggered by <insert_reason> run $(Build.BuildId)." \
+      --query id -o tsv)
+
+    # 2. Create PR and automatically link the PBI ID
+    PR_ID=$(az repos pr create \
+      --repository "<insert_repo>" \
+      --source-branch "bot/<insert_name>-sync-$(Build.BuildId)" \
+      --target-branch "main" \
+      --title "Auto-Sync: Updated <insert_repo>" \
+      --work-items $PBI_ID \
+      --query pullRequestId -o tsv)
+
+    echo "Successfully created PBI #$PBI_ID and PR #$PR_ID"
+  displayName: 'Create PBI and PR via Azure DevOps CLI'
+  env:
+    AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
